@@ -63,8 +63,6 @@ var generateKittenObjs = function(numKittens) {
    }
 }
 
-
-
  function getTwoKittens(imgAr) {
 
    // Clears the div for new cat photos.
