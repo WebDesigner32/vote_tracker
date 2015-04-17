@@ -66,8 +66,7 @@ var generateKittenObjs = function(numKittens) {
  function getTwoKittens(imgAr) {
 
    // Clears the div for new cat photos.
-   var kittenDiv = document.getElementById('kittens');
-   kittenDiv.innerHTML = "";
+   var $kittenDiv = $('#kittens').empty();
 
    var num = Math.floor(Math.random() * imgAr.length);
    var num2 = Math.floor(Math.random() * imgAr.length);
@@ -79,23 +78,24 @@ var generateKittenObjs = function(numKittens) {
    var kitten1 = imgAr[num];
    var kitten2 = imgAr[num2];
 
-   var img1 = document.createElement('img');
-   img1.setAttribute('id', 'imgOne');
-   img1.src = kitten1.imgUrl;
+   var img1 = $('<img>').attr({
+    id: 'imgOne',
+    src: kitten1.imgUrl
+   });
 
-   var img2 = document.createElement('img');
-   img2.setAttribute('id', 'imgTwo');
-   img2.src = kitten2.imgUrl;
+   var img2 = $('<img>').attr({
+    id: 'imgTwo',
+    src: kitten2.imgUrl
+   });
 
 
-   kittenDiv.appendChild(img1);
-   kittenDiv.appendChild(img2);
+   $kittenDiv.append(img1, img2);
 
-   var kitten1image = document.getElementById('imgOne');
-   var kitten2image = document.getElementById('imgTwo');
+   var $kitten1image = $('#imgOne');
+   var $kitten2image = $('#imgTwo');
 
-   kitten1image.addEventListener('click', function() {
-      kitten1image.style.border = "5px solid blue";
+   $('#imgOne').on('click', function() {
+      $(this).css("border", "5px solid yellow");
 
       kitten1.votes++;
 
@@ -108,19 +108,18 @@ var generateKittenObjs = function(numKittens) {
 
 
    });
-   kitten2image.addEventListener('click', function() {
-      kitten2image.style.border = "5px solid red";
+   $('#imgTwo').on("click", function() {
+    $(this).css("border", "5px solid yellow");
 
       kitten2.votes++;
 
-      kitten2.timesShown++;
       kitten1.timesShown++;
+      kitten2.timesShown++;
 
       setTimeout(getTwoKittens, 500, randomKittens);
 
       kittenChartVotes(kitten1.votes, kitten2.votes);
-
-   });
+   })
  };
 
 generateKittenObjs(14);
