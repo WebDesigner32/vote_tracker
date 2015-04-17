@@ -52,15 +52,29 @@ var ctx = document.getElementById("kittenChart").getContext("2d");
 var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
 }
 
-var generateKittenObjs = function(numKittens) {
-   for(var i=1; i <= numKittens; i++) {
-      var kitten = {
-         imgUrl: './kittens/kitten' + i + '.jpg',
-         votes: 0,
-         timesShown: 0
-      };
-      randomKittens.push(kitten);
-   }
+var generateKittenObjs = function() {
+
+  $.ajax({
+    url: 'https://api.imgur.com/3/album/DDoWy#0',
+    headers: {
+      Authorization: 'Client-ID edc8c3598e00d8c'
+    },
+    dataType: 'json',
+    success: function (json) {
+      var kittenPicsArray = json.data.images;
+
+     for(var i=0; i < kittenPicsArray.length; i++) {
+        var kitten = {
+           imgUrl: kittenPicsArray[i].link,
+           votes: 0,
+           timesShown: 0
+        };
+        randomKittens.push(kitten);
+      }
+
+      getTwoKittens(randomKittens);
+    }
+  });
 }
 
  function getTwoKittens(imgAr) {
@@ -122,8 +136,6 @@ var generateKittenObjs = function(numKittens) {
    })
  };
 
-generateKittenObjs(14);
-
-getTwoKittens(randomKittens);
+generateKittenObjs();
 
 }());
