@@ -23,7 +23,9 @@ img {
   margin-top: 100px;
 }
 
-
+canvas {
+  max-width: 100%;
+}
 
 
 
