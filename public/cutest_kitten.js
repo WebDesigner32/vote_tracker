@@ -19,7 +19,7 @@ function kittenChartVotes(kitten1Votes, kitten2Votes) {
     },
     ];
  var options = {
- //Boolean - Whether we should show a stroke on each segment
+        //Boolean - Whether we should show a stroke on each segment
        segmentShowStroke : true,
 
        //String - The colour of each segment stroke
@@ -49,7 +49,7 @@ function kittenChartVotes(kitten1Votes, kitten2Votes) {
 };
 
 var ctx = document.getElementById("kittenChart").getContext("2d");
-var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
+var myDoughnutChart = new Chart(ctx).Bar(data,options);
 }
 
 var generateKittenObjs = function() {
@@ -102,7 +102,6 @@ var generateKittenObjs = function() {
     src: kitten2.imgUrl
    });
 
-
    $kittenDiv.append(img1, img2);
 
    var $kitten1image = $('#imgOne');
@@ -119,9 +118,8 @@ var generateKittenObjs = function() {
       setTimeout(getTwoKittens, 500, randomKittens);
 
       kittenChartVotes(kitten1.votes, kitten2.votes);
-
-
    });
+
    $('#imgTwo').on("click", function() {
     $(this).css("border", "5px solid yellow");
 
